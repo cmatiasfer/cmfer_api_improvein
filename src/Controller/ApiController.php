@@ -1,16 +1,16 @@
 <?php
 namespace App\Controller;
 
-use App\Entity\User;
+use App\Entity\Users;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\Config\Definition\Exception\Exception;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\{Request, Response};
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-//use Swagger\Annotations as SWG;
 use OpenApi\Annotations as OA;
+use JMS\Serializer\SerializerInterface;
+
 
 /**
  * Class ApiController
@@ -36,27 +36,29 @@ class ApiController extends AbstractFOSRestController
      *
      * @OA\Parameter(
      *     name="_username",
-     *     in="header",
-     *     description="The username",
+     *     in="query",
+     *     description="The user name for login",
      *     @OA\Schema(
      *       type="string",
      *     )
+     * 
      * )
      *
      * @OA\Parameter(
      *     name="_password",
-     *     in="header",
-     *     description="The password",
+     *     in="query",
      *     @OA\Schema(
      *       type="string",
      *     )
      * )
+
      *
      * @OA\Tag(name="User")
      */
     public function getLoginCheckAction(Request $request) {
         return $request;
     }
+
     /**
      * @Rest\Get("/v1/username_check", name="user_check")
      *
@@ -82,7 +84,7 @@ class ApiController extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Post("/v1/users.{_format}", name="user_add", defaults={"_format":"json"})
+     * @Rest\Post("/register", name="user_register")
      *
      * @OA\Response(
      *     response=201,
@@ -93,12 +95,45 @@ class ApiController extends AbstractFOSRestController
      *     response=500,
      *     description="An error was occurred trying to add User"
      * )
+     * 
+     * @OA\Parameter(
+     *     name="_name",
+     *     in="query",
+     *     @OA\Schema(
+     *       type="string",
+     *     ),
+     *     schema={}
+     * )
      *
+     * @OA\Parameter(
+     *     name="_email",
+     *     in="query",
+     *     @OA\Schema(
+     *       type="string",
+     *     ),
+     *     schema={}
+     * )
+     *
+     * @OA\Parameter(
+     *     name="_username",
+     *     in="query",
+     *     @OA\Schema(
+     *       type="string",
+     *     ),
+     *     schema={}
+     * )
+     *
+     * @OA\Parameter(
+     *     name="_password",
+     *     in="query",
+     *     @OA\Schema(
+     *       type="string",
+     *     ),
+     * )
      *
      * @OA\Tag(name="User")
      */
-    public function registerAction(Request $request, UserPasswordEncoderInterface $encoder) {
-        $serializer = $this->get('jms_serializer');
+    public function registerAction(Request $request, UserPasswordEncoderInterface $encoder,SerializerInterface $serializer) {
         $em = $this->getDoctrine()->getManager();
  
         $user = [];
@@ -133,7 +168,7 @@ class ApiController extends AbstractFOSRestController
             
             
             if(is_null($exist_email) && is_null($exist_username) && !is_null($password)){
-                $user = new User();
+                $user = new Users();
                 $user->setName($name);
                 $user->setEmail($email);
                 $user->setUsername($username);
@@ -233,12 +268,6 @@ class ApiController extends AbstractFOSRestController
         return new Response($serializer->serialize($response, "json"));
     }
     
-    /**
-     * @Route("/v1/", name="api")
-     */
-    public function api()
-    {
-        return new Response(sprintf('Logged in as %s', $this->getUser()->getUsername()));
-    }
+    
 
 }

@@ -1,6 +1,6 @@
 security:
     encoders:
-        App\Entity\User:
+        App\Entity\Users:
             algorithm: sha512
 
     providers:
