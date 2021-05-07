@@ -97,6 +97,9 @@
             "./config/packages/fos_rest.yaml"
         ]
     },
+    "gesdinet/jwt-refresh-token-bundle": {
+        "version": "v0.12.0"
+    },
     "jms/metadata": {
         "version": "2.5.0"
     },
@@ -156,6 +159,9 @@
             "./config/packages/nelmio_api_doc.yaml",
             "./config/routes/nelmio_api_doc.yaml"
         ]
+    },
+    "nikic/php-parser": {
+        "version": "v4.10.5"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
@@ -285,6 +291,15 @@
     "symfony/http-kernel": {
         "version": "v5.2.6"
     },
+    "symfony/maker-bundle": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
+        }
+    },
     "symfony/options-resolver": {
         "version": "v5.2.4"
     },
@@ -387,6 +402,19 @@
     },
     "symfony/twig-pack": {
         "version": "v1.0.1"
+    },
+    "symfony/validator": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "d902da3e4952f18d3bf05aab29512eb61cabd869"
+        },
+        "files": [
+            "./config/packages/test/validator.yaml",
+            "./config/packages/validator.yaml"
+        ]
     },
     "symfony/var-dumper": {
         "version": "v5.2.6"

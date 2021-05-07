@@ -2,16 +2,12 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 use Symfony\Component\Security\Core\User\UserInterface;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * User
- *
- * @ORM\Table(name="users");
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository");
  * @ORM\HasLifecycleCallbacks()
  */

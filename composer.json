@@ -12,6 +12,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.1",
         "doctrine/orm": "^2.8",
         "friendsofsymfony/rest-bundle": "^3.0",
+        "gesdinet/jwt-refresh-token-bundle": "^0.12.0",
         "jms/serializer-bundle": "^3.9",
         "lcobucci/jwt": "^3.4",
         "lexik/jwt-authentication-bundle": "^2.11",
@@ -71,5 +72,8 @@
             "allow-contrib": "true",
             "require": "5.2.*"
         }
+    },
+    "require-dev": {
+        "symfony/maker-bundle": "^1.30"
     }
 }

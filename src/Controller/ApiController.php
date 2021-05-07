@@ -229,8 +229,7 @@ class ApiController extends AbstractFOSRestController
      *
      * @OA\Tag(name="User")
      */
-    public function getAllUserAction(Request $request) {
-        $serializer = $this->get('jms_serializer');
+    public function getAllUserAction(Request $request, SerializerInterface $serializer) {
         $em = $this->getDoctrine()->getManager();
         $contact = [];
         $message = "";
